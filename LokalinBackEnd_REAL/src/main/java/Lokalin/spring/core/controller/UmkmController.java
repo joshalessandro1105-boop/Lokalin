@@ -28,6 +28,22 @@ public class UmkmController {
         return ResponseEntity.ok(umkmService.getUmkmById(id));
     }
 
+    @PostMapping
+    public ResponseEntity<Umkm> createUmkm(@RequestBody Umkm umkm) {
+        return ResponseEntity.ok(umkmService.createUmkm(umkm));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Umkm> updateUmkm(@PathVariable Long id, @RequestBody Umkm umkm) {
+        return ResponseEntity.ok(umkmService.updateUmkm(id, umkm));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUmkm(@PathVariable Long id) {
+        umkmService.deleteUmkm(id);
+        return ResponseEntity.noContent().build();
+    }
+
     @PostMapping("/{id}/pay")
     public ResponseEntity<String> simulatePayment(@PathVariable Long id, @RequestParam Double amount) {
         String txId = paymentSimulationService.createTransaction(amount);
